@@ -3,7 +3,20 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
+    loadComponent: () => import('./home/home.page').then(m => m.HomePage),
+  },
+  {
+    path: 'recipe-details/:id',
+    loadComponent: () =>
+      import('./recipe-details/recipe-details.page').then(m => m.RecipeDetailsPage),
+  },
+  {
+    path: 'favourite',
+    loadComponent: () => import('./favourite/favourite.page').then(m => m.FavouritePage),
+  },
+  {
+    path: 'settings',
+    loadComponent: () => import('./settings/settings.page').then(m => m.SettingsPage),
   },
   {
     path: '',
@@ -11,15 +24,7 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'recipe-details',
-    loadComponent: () => import('./recipe-details/recipe-details.page').then( m => m.RecipeDetailsPage)
-  },
-  {
-    path: 'favourite',
-    loadComponent: () => import('./favourite/favourite.page').then( m => m.FavouritePage)
-  },
-  {
-    path: 'settings',
-    loadComponent: () => import('./settings/settings.page').then( m => m.SettingsPage)
+    path: '**',
+    redirectTo: 'home',
   },
 ];
