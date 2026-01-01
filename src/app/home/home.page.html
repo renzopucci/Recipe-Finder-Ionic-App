@@ -1,20 +1,31 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>G00472924</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/favourite']">
+        <ion-icon name="heart" slot="icon-only"></ion-icon>
+      </ion-button>
+
+      <ion-button [routerLink]="['/settings']">
+        <ion-icon name="settings" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <p>Home is loading correctly.</p>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-item>
+    <ion-input
+      label="Ingredients"
+      labelPlacement="stacked"
+      placeholder="e.g. chicken, rice"
+    ></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" class="ion-margin-top">
+    Search
+  </ion-button>
 </ion-content>
