@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../services/recipe.service';
+import { StorageService } from '../services/storage.service';
+
 
 @Component({
   selector: 'app-recipe-details',
@@ -14,13 +16,17 @@ import { RecipeService } from '../services/recipe.service';
 export class RecipeDetailsPage implements OnInit {
   recipeId!: number;
   recipe: any;
+  measurement: 'metric' | 'us' = 'metric';
+
 
   constructor(
     private route: ActivatedRoute,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    private storageService: StorageService
   ) {}
 
   ngOnInit() {
+    this.measurement = this.storageService.getMeasurement();
     this.recipeId = Number(this.route.snapshot.paramMap.get('id'));
     this.loadRecipe();
   }

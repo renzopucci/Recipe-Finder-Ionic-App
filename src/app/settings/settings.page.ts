@@ -1,20 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
   styleUrls: ['./settings.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule],
 })
-export class SettingsPage implements OnInit {
+export class SettingsPage {
+  measurement: 'metric' | 'us' = 'metric';
 
-  constructor() { }
+  constructor(private storageService: StorageService) {}
 
-  ngOnInit() {
+  ionViewWillEnter() {
+    this.measurement = this.storageService.getMeasurement();
   }
 
+  onChange() {
+    this.storageService.setMeasurement(this.measurement);
+  }
 }

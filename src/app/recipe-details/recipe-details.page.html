@@ -16,14 +16,25 @@
       style="width: 100%; max-width: 400px;"
     />
 
-    <h3>Ingredients</h3>
-    <ion-list>
-      <ion-item *ngFor="let ing of recipe.extendedIngredients">
-        <ion-label>
-          {{ ing.original }}
-        </ion-label>
-      </ion-item>
-    </ion-list>
+    <h3>Ingredients ({{ measurement === 'metric' ? 'Metric' : 'US' }})</h3>
+
+<ion-list>
+  <ion-item *ngFor="let ing of recipe.extendedIngredients">
+    <ion-label>
+      <div>
+        <strong>{{ ing.original }}</strong>
+      </div>
+
+      <div *ngIf="measurement === 'metric'">
+        {{ ing.measures.metric.amount }} {{ ing.measures.metric.unitLong }}
+      </div>
+
+      <div *ngIf="measurement === 'us'">
+        {{ ing.measures.us.amount }} {{ ing.measures.us.unitLong }}
+      </div>
+    </ion-label>
+  </ion-item>
+</ion-list>
 
     <h3>Instructions</h3>
 
