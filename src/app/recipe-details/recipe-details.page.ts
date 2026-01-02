@@ -17,6 +17,8 @@ export class RecipeDetailsPage implements OnInit {
   recipeId!: number;
   recipe: any;
   measurement: 'metric' | 'us' = 'metric';
+  isFav = false;
+
 
 
   constructor(
@@ -35,10 +37,27 @@ export class RecipeDetailsPage implements OnInit {
     this.recipeService.getRecipeDetails(this.recipeId).subscribe({
       next: (data: any) => {
         this.recipe = data;
+        this.isFav = this.storageService.isFavourite(this.recipeId);
       },
       error: (err: any) => {
         console.error('Error loading recipe details', err);
       },
     });
   }
+  toggleFavourite() {
+  if (!this.recipe) return;
+
+  if (this.isFav) {
+    this.storageService.removeFavourite(this.recipeId);
+    this.isFav = false;
+  } else {
+    this.storageService.addFavourite({
+      id: this.recipeId,
+      title: this.recipe.title,
+      image: this.recipe.image,
+    });
+    this.isFav = true;
+  }
+}
+
 }

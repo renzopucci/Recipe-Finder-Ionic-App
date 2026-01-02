@@ -50,5 +50,12 @@
     <p *ngIf="recipe.analyzedInstructions.length === 0">
       No instructions available.
     </p>
+   
+    <ion-button expand="block" class="ion-margin-top" (click)="toggleFavourite()">
+  {{ isFav ? 'Remove From Favourites' : 'Add to Favourites' }}
+</ion-button>
+
   </div>
+
+
 </ion-content>
