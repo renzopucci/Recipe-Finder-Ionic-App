@@ -1,13 +1,43 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>recipe-details</ion-title>
+    <ion-title>Recipe Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">recipe-details</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <p *ngIf="!recipe">Loading recipe...</p>
+
+  <div *ngIf="recipe">
+    <h2>{{ recipe.title }}</h2>
+
+    <img
+      [src]="recipe.image"
+      alt="recipe image"
+      style="width: 100%; max-width: 400px;"
+    />
+
+    <h3>Ingredients</h3>
+    <ion-list>
+      <ion-item *ngFor="let ing of recipe.extendedIngredients">
+        <ion-label>
+          {{ ing.original }}
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <h3>Instructions</h3>
+
+    <ion-list *ngIf="recipe.analyzedInstructions.length > 0">
+      <ion-item *ngFor="let step of recipe.analyzedInstructions[0].steps">
+        <ion-label>
+          <strong>Step {{ step.number }}:</strong>
+          {{ step.step }}
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <p *ngIf="recipe.analyzedInstructions.length === 0">
+      No instructions available.
+    </p>
+  </div>
 </ion-content>

@@ -31,4 +31,13 @@ export class RecipeService {
       .get<SpoonacularSearchResponse>(`${this.baseUrl}/complexSearch`, { params })
       .pipe(map((res) => res.results));
   }
+  getRecipeDetails(id: number): Observable<any> {
+  const params = new HttpParams().set('apiKey', this.apiKey);
+
+  return this.http.get<any>(
+    `${this.baseUrl}/${id}/information`,
+    { params }
+  );
+}
+
 }
